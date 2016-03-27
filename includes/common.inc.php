@@ -11,6 +11,8 @@
 if (!defined('IN_TG')){
 	exit('woriing');
 }
+//设置字符集编码
+header('Content-Type: text/html; charset=utf-8');
 //防止恶意调用
 //转换硬路径常量
 define('ROOT_PATH',substr(dirname(__FILE__),0,-8));

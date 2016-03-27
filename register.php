@@ -61,7 +61,7 @@ if (@$_GET['action']=='register'){
 		//新增用户
 		//在双引号里，直接放变量是可以的，比如$_username,但如果是数组，就必须加上{} ，比如 {$_clean['username']}
 		if (count($_clean)==11) {
-				$query=mysql_query(
+				_query(
 				"INSERT INTO tg_user(
 							tg_uniqid,
 							tg_active,
@@ -93,10 +93,20 @@ if (@$_GET['action']=='register'){
 							NOW(),
 							'{$_SERVER["REMOTE_ADDR"]}'
 							)"
-		) or die('恭喜失败'.mysql_error());
-				_close();
-				//跳转
-				_location('恭喜你注册成功','index.php');
+		);
+			if(_affected_rows()==1){
+					_close();
+					//跳转
+					_session_destroy();
+					_location('恭喜你注册成功','active.php?active='.$_clean['active']);}
+			else{
+					_close();
+					//跳转
+					_session_destroy();
+					_location('很遗憾，注册失败','register.php');
+				}
+			//echo _affected_rows();
+			//测试这个函数是否有用
 		}
 	}else _alert_back('请输入验证码 ');
 }else{
@@ -112,6 +122,7 @@ $_SESSION['uniqid'] = $_uniqid = _sha1_uniqid();
 <?php 
 	require_once ROOT_PATH.'includes/title.inc.php';
 ?>
+<script type="text/javascript" src="js/code.js"></script>
 <script type="text/javascript" src="js/register.js"></script>
 </head>
 <body>
@@ -137,7 +148,7 @@ $_SESSION['uniqid'] = $_uniqid = _sha1_uniqid();
 			<dd>电子邮件:<input type="text" name="email"class="text" />(必填)</dd>
 			<dd>&nbsp;Q&nbsp;&nbsp;Q&nbsp;:<input type="text" name="qq"class="text" /></dd>
 			<dd>主页地址:<input type="text" name="url"class="text" value="http://"/></dd>
-			<dd>验&nbsp;证&nbsp;码:<input type="text" name="code"class="text yzm" /><img src="code.php" id="code" onclick="code();"></img></dd>
+			<dd>验&nbsp;证&nbsp;码:<input type="text" name="code"class="text yzm" /><img src="code.php" id="code"></img></dd>
 			<dd><input type="submit" class="submit" value="注册"/></dd>
 		</dl>
 		</form>

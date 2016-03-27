@@ -39,10 +39,18 @@ function _alert_back($_info){
 	exit();
 }
 function _location($_info,$_url) {
+	if(!empty($_info)){
 	echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
-	exit();
+	exit();}else{
+		header('Location:'.$_url);
+	}
 }
-
+/*
+ *清空session
+ */
+function _session_destroy(){
+	session_destroy();
+}
 
 function _check_code($_first_code,$_end_code){
 	if ($_first_code!=$_end_code) {

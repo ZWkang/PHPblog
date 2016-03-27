@@ -1,6 +1,6 @@
 <?php
 /**
-* TestGuest Version18.0
+* TestGuest Version1.8
 * ================================================
 * Copy 2016 kang
 * Web: 

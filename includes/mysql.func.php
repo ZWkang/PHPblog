@@ -51,6 +51,13 @@ function _query($_sql){
 function _fetch_array($_sql){
 	return mysql_fetch_array(_query($_sql),MYSQL_ASSOC);
 }
+/**
+*_affected_rows表示影响的记录条数
+*
+*/
+function _affected_rows(){
+	return mysql_affected_rows();
+}
 
 function _is_repeat($_sql,$_info){
 	// echo $_sql;
