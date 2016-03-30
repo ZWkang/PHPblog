@@ -1,12 +1,12 @@
 <?php
 /**
-* TestGuest Version1.8
+* TestGuest Version2.0
 * ================================================
-* Copy 2016 kang
-* Web: 
+* Copy 2015 kang
+* Web: localhost
 * ================================================
 * Author: kang
-* Date: 2016-3-26
+* Date: 2015-11-28
 */
 header('Content-Type: text/html; charset=utf-8');
 session_start();
@@ -16,6 +16,8 @@ define('IN_TG',true);
 define('SCRIPT','login');
 //引入公共文件
 require dirname(__FILE__).'/includes/common.inc.php';
+//登录状态
+_login_state(); 
 //开始处理登录状态
 if (@$_GET['action'] == 'login') {
 	//验证码的验证
@@ -27,10 +29,10 @@ if (@$_GET['action'] == 'login') {
 	$_clean['password']=_check_password($_POST['password'],6);
 	$_clean['time']=_check_time($_POST['time']);
 	//数据库验证
-	if(!!$_rows = _fetch_array("SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$_clean['username']}' and tg_password='{$_clean['password']}' and tg_active='' LIMIT 1")){
-
+	if(!!$_rows = _fetch_array("SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$_clean['username']}' AND tg_password='{$_clean['password']}' AND tg_active='' LIMIT 1")){
 		_close();
 		_session_destroy();
+		_setcookies($_rows['tg_username'],$_rows['tg_uniqid'],$_clean['time']);
 		_location(null,'index.php');
 	}else{
 		_close();

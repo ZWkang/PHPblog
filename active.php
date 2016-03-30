@@ -1,12 +1,12 @@
 <?php
 /**
-* TestGuest Version1.8
+* TestGuest Version2.0
 * ================================================
-* Copy 2016 kang
-* Web: 
+* Copy 2015 kang
+* Web: localhost
 * ================================================
 * Author: kang
-* Date: 2016-3-26
+* Date: 2015-11-28
 */
 //定义个常量，用来授权调用includes里面的文件
 define('IN_TG',true);

@@ -1,12 +1,12 @@
 <?php
-/*
-*TestGuest Version10.0
+/**
+* TestGuest Version2.0
 * ================================================
 * Copy 2015 kang
 * Web: localhost
 * ================================================
 * Author: kang
-* Date: 2015-12-15
+* Date: 2015-11-28
 */
 if (!defined('IN_TG')){
 	exit('woriing');

@@ -45,11 +45,30 @@ function _location($_info,$_url) {
 		header('Location:'.$_url);
 	}
 }
+/**
+ *防止登录后还可以访问注册和登录界面
+ */
+function _login_state(){
+	if(isset($_COOKIE['username'])){
+		_alert_back('登录状态无法进行本操作');
+	}
+}
+
+
 /*
- *清空session
+ *_session_destroy清空session
  */
 function _session_destroy(){
+	session_unset();
 	session_destroy();
+}
+
+//删除cookie
+function _unsetcookie(){
+	setcookie('username','',time()-1);
+	setcookie('uniqid','',time()-1);
+	_session_destroy();
+	_location(null,'index.php');
 }
 
 function _check_code($_first_code,$_end_code){

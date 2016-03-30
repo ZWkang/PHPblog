@@ -1,12 +1,12 @@
 <?php
-/*
-*TestGuest Version10.0
+/**
+* TestGuest Version2.0
 * ================================================
 * Copy 2015 kang
 * Web: localhost
 * ================================================
 * Author: kang
-* Date: 2015-12-15
+* Date: 2015-11-28
 */
 if (!defined('IN_TG')){
 	exit('woriing');
@@ -22,6 +22,32 @@ header('Content-Type:text/html;charset=utf-8');
 if (!function_exists('_alert_back')){
 			echo "<script>alert ('函数不存在请检查!');histroy.back(-1);</script>";
 }
+/**
+*设置cookie值
+*
+*
+*/
+function _setcookies($_username,$_uniqid,$_time){
+	switch ($_time) {
+		case '0'://浏览器进程
+			setcookie('username',$_username);
+			setcookie('uniqid',$_uniqid);
+			break;
+		case '1'://一天
+			setcookie('username',$_username,time()+86400);
+			setcookie('uniqid',$_uniqid,time()+86400);
+			break;
+		case '2'://一周
+			setcookie('username',$_username,time()+86400*7);
+			setcookie('uniqid',$_uniqid,time()+86400*7);
+			break;
+		case '3'://一月
+			setcookie('username',$_username,time()+86400*30);
+			setcookie('uniqid',$_uniqid,time()+86400*30);
+			break;
+	}
+}
+
 
 function _check_form($string,$_min_number,$_max_number){
 	//去掉两边空格
