@@ -1,0 +1,40 @@
+@CHARSET "UTF-8";
+#blog{
+	width:auto;
+	height:1000px;
+	border:2px solid #ccc;
+	
+}
+#blog h2{
+	text-indent:0;
+	text-align:center;
+}
+#blog dl{
+	width: 150px;
+	margin:10px 0 0 32px;
+	float: left;
+}
+#blog dl dt{
+	width: 150px;
+	margin: 0 0 5px 0;
+}
+#blog dl dt img{
+	margin: 0 auto;
+	display: block;
+}
+#blog dl dd{
+	height: 20px;
+	line-height: 20px;
+	text-align: center;
+	
+	width: 75px;
+	float: left;
+}
+
+#blog dl dd.user{
+	width: 150px;
+	float: none;
+	color: #f60;
+}
+
+
