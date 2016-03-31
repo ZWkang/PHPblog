@@ -30,27 +30,42 @@ function _connect(){
 			exit('数据库连接失败');
 		}
 	}
+	//选择数据库
 function _select_db(){
 	if(!$_conn=@mysql_select_db(DB_NAME)){
 			exit('数据库找不到');
 		}
 }
+//设置字符集
 function _set_names(){
 	if(!$_conn=@mysql_query("SET NAMES UTF8")){
 			exit('字符集设置错误');
 		}
 }
-
+//执行sql语句返回结果集
 function _query($_sql){
 	if(!$_result = mysql_query($_sql)){
 		exit('SQL执行失败'.mysql_error());
 	}
 	return $_result;
 }
-
+/**
+ * _fetch_array只能获取一条数据组
+ */
 function _fetch_array($_sql){
 	return mysql_fetch_array(_query($_sql),MYSQL_ASSOC);
 }
+
+/**
+ * _fetch_array_list使用结果集而不是sql语句来使用取得返回结果集
+ * 用于循环，可以返回结果集里面的所有数据
+ * {data()};
+ */
+function _fetch_array_list($_result){
+	return mysql_fetch_array($_result,MYSQL_ASSOC);
+}
+
+
 /**
 *_affected_rows表示影响的记录条数
 *

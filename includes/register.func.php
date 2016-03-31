@@ -60,7 +60,7 @@ function _check_form($string,$_min_number,$_max_number){
 		_alert_back('用户名长度小于'.$_min_number.'位大于'.$_max_number.'位');}
 	
 	//限制敏感字符
-	$_char_pattern="/[<>\'\"\ \\\]/";
+	$_char_pattern="/[<>\'\"\ ]/";
 	if(preg_match($_char_pattern, $_string))
 	{
 		_alert_back('用户名含有敏感字符');		

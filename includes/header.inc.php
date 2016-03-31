@@ -30,6 +30,7 @@ if (!defined('IN_TG')){
 				}
 			?>
 			<li>管理</li>
+			<li><a href="blog.php"></a></li>
 			<li>风格</li>
 			<?php
 				if(isset($_COOKIE['username'])){
@@ -38,6 +39,5 @@ if (!defined('IN_TG')){
 
 			?>
 			
-			
-		</ul>
-	</div>	
+			</ul>
+		</div>	
