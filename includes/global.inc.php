@@ -15,6 +15,7 @@ if (!defined('IN_TG')){
 
 //运行时间
 error_reporting(E_ALL ^ E_DEPRECATED);
+
 /*
  * _runtime是用来获取执行耗时的
  * @access public 表示函数对外公开
@@ -29,6 +30,108 @@ function _runtime() {
 			return $m_time[1]+$m_time[0];
 		}
 }
+/**
+ *_html函数表示对字符串进行html过滤显示，如果是数组按数组方法过滤，如果是单独的字符串按单独字符串过滤 
+ *@param unknown_type $_string
+ */
+function _html($_string){
+	if (is_array($_string)) {
+		foreach($_string as $_key => $_value){
+			$_string[$_key]=_html($_value);//递归调用
+			// $_string[$_key]=htmlspecialchars($_value);非递归调用
+		}
+	}else{
+		$_string =  htmlspecialchars($_string);
+	}
+	return $_string;
+}
+
+/**
+ * _page
+ *	@param $_sql要查询的sql语句
+ *	@param $_size表示要显示一页博友的多少
+ */
+function _page($_sql,$_size){
+	//页码
+	//函数内的所有变量取出。外部可以访问
+	global $_page,$_pagenum,$_pagesize,$_pageabsolute,$_number;
+	if (isset($_GET['page'])) {
+		$_page=$_GET['page'];	
+		if(empty($_page)||$_page<0 ||!is_numeric($_page)){
+			$_page=1;
+		}else{
+			$_page=intval($_page);
+		}
+	}else{
+		$_page=1;
+	}
+	$_pagesize=$_size;
+	//首先要得到所有的数据之和
+	$_number=_num_rows(_query($_sql));
+
+	if($_number==0){
+		$_pageabsolute=1;
+	}else{
+		$_pageabsolute=ceil($_number/$_pagesize);
+	}
+	if($_page>$_pageabsolute){
+		$_page=$_pageabsolute;
+	}
+	$_pagenum=($_page-1)*$_pagesize;
+	//首页要得到所有的数据综合
+	//如果number=0
+
+}
+
+
+
+/**
+ * _paging分页函数
+ *	@param 选择分页
+ *	@return 返回分页
+ */
+function _paging($_type){
+	//函数内部定义全局变量可以调用函数外的变量，在函数执行结束的时候释放
+	global $_page,$_pageabsolute,$_number;
+	if($_type==1){
+		echo '<div id="page_num">';
+			echo '<ul>';
+				for($i=0;$i<$_pageabsolute;$i++){
+					if($_page==$i+1){
+						echo	'<li><a href="blog.php?page='.($i+1).'"class="selected">'.($i+1).'</a></li>';
+					}else{
+						echo	'<li><a href="blog.php?page='.($i+1).'">'.($i+1).'</a></li>';
+					}
+				}
+			echo '</ul>';
+		echo '</div>';
+	}elseif($_type==2){
+		echo '<div id="page_text">';
+			echo '<ul>';
+				echo '<li>|'.$_page.' / '.$_pageabsolute.' 页 |</li>';
+				echo '<li> 共有<strong>'.$_number.'</strong>个会员 | </li>';
+					if($_page==1){
+						echo '<li>首页 |</li>';
+						echo '<li>上一页 |</li>';
+					}else{
+						echo '<li><a href="'.SCRIPT.'.php?page=1">首页</a> |</li>';
+						echo '<li><a href="'.SCRIPT.'.php?page='.($_page-1).'">上一页</a> |</li>';
+					}
+					if($_page==$_pageabsolute){
+						echo '<li>下一页 |</li>';
+						echo '<li>尾页 |</li>';
+					}else{
+						echo '<li><a href="'.SCRIPT.'.php?page='.($_page+1).'">下一页</a> |</li>';
+						echo '<li><a href="'.SCRIPT.'.php?page='.($_pageabsolute).'">尾页</a> |</li>';
+					}
+
+				
+			echo '</ul>';
+		echo '</div>';
+	}
+}
+
+
 /**_alert_back(){}表示js弹窗
  * @access public
  * @param $_info

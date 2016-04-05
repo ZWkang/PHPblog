@@ -60,6 +60,57 @@ h2{
 	color:orange;
 	text-decoration:none;
 }
+#page_text{
+	clear: both;
+	height: 20px;
+	padding: 20px 0;
+}
+#page_text ul{
+	text-align: center;
+}
+#page_text ul li{
+	display: inline;
+}
+#page_text ul li a{
+	color: #333;
+
+	text-decoration: none;
+}
+#page_num{
+	clear: both;
+	height: 20px;
+	padding: 20px 0;
+	position: relative;
+}
+#page_num ul{
+	position: absolute;
+	right: 200px;
+	height: 20px;
+}
+#page_num ul li{
+	float: left;
+	width: 26px;
+	height: 20px;
+}
+#page_num ul li a{
+	display: block;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #333;
+	text-align: center;
+	text-decoration: none;
+}
+#page_num ul li a:hover{
+	color: #fff;
+	background: #666;
+	font-weight: bold;
+}
+#page_num ul li a:hover,#page_num ul li a.selected{
+	color: #fff;
+	background: #666;
+	font-weight: bold;
+}
 #footer{
 	clear:both;
 	width:auto;

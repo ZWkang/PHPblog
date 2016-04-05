@@ -1,12 +1,12 @@
 <?php
 /**
-* TestGuest Version1.0
+* TestGuest Version2.0
 * ================================================
 * Copy 2015 kang
 * Web: localhost
 * ================================================
 * Author: kang
-* Date: 2015-11-29
+* Date: 2015-11-28
 */
 session_start();
 //定义个常量，用来授权调用includes里面的文件
@@ -17,7 +17,8 @@ define('IN_TG', true);
 define('SCRIPT', 'register');
 //引入公共文件
 require_once dirname(__FILE__).'/includes/common.inc.php';
-
+//登录状态
+_login_state(); 
 // mysql_query("INSERT INTO tg_user(tg_username) VALUES('kang')") or die(mysql_error());
 
 //判断是否提交了
@@ -146,9 +147,9 @@ $_SESSION['uniqid'] = $_uniqid = _sha1_uniqid();
 			<dd class="face"><input type="hidden" name="face" value="face/m01.gif" />
 			<img src="face/m01.gif" alt="头像选择" id="faceimg"/></dd>
 			<dd>电子邮件:<input type="text" name="email"class="text" />(必填)</dd>
-			<dd>&nbsp;Q&nbsp;&nbsp;Q&nbsp;:<input type="text" name="qq"class="text" /></dd>
+			<dd>&nbsp;Q&nbsp;Q&nbsp;:<input type="text" name="qq"class="text" /></dd>
 			<dd>主页地址:<input type="text" name="url"class="text" value="http://"/></dd>
-			<dd>验&nbsp;证&nbsp;码:<input type="text" name="code"class="text yzm" /><img src="code.php" id="code"></img></dd>
+			<dd>验证码&nbsp;:<input type="text" name="code"class="text yzm" />&nbsp;&nbsp;<img src="code.php" id="code"></img></dd>
 			<dd><input type="submit" class="submit" value="注册"/></dd>
 		</dl>
 		</form>

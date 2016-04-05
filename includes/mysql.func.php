@@ -64,7 +64,14 @@ function _fetch_array($_sql){
 function _fetch_array_list($_result){
 	return mysql_fetch_array($_result,MYSQL_ASSOC);
 }
+/**
+ * _free_result() 销毁大量的结果集
+ * @param $_result()要销毁的结果集
+ */
+function _free_result($_result){
+	return mysql_free_result($_result);
 
+}
 
 /**
 *_affected_rows表示影响的记录条数
@@ -73,7 +80,17 @@ function _fetch_array_list($_result){
 function _affected_rows(){
 	return mysql_affected_rows();
 }
-
+/**
+ * _num_rows返回查询结果集的行数
+ */
+function _num_rows($_result){
+	return mysql_num_rows($_result);
+}
+/**
+ * _is_repeat 用于查询数据库语句，如果有匹配则输出一句话
+ * @param $_sql sql语句
+ * @param $_info 一句话
+ */
 function _is_repeat($_sql,$_info){
 	// echo $_sql;
 	//echo $_info;

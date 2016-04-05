@@ -7,7 +7,7 @@
 * ================================================
 * Author: kang
 * Date: 2015-11-28
-*/	
+*/
 //defined判断一个常量是否存在
 //定义一个常量用来授权调用includes里面的文件
 define('IN_TG', true);
@@ -20,7 +20,6 @@ require_once dirname(__FILE__).'/includes/common.inc.php';
 
 //先导入这个含有常量的文件才能得到ROOT_PATH这个常量
 //转换成硬路径速度更快
-
 ?>
 
 

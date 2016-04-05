@@ -1,3 +1,3 @@
 # PHPblog
-VERSION 2.2
+VERSION 2.9
 thanks

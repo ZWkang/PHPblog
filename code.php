@@ -1,12 +1,12 @@
 <?php
 /**
-* TestGuest Version8.0
+* TestGuest Version2.0
 * ================================================
 * Copy 2015 kang
 * Web: localhost
 * ================================================
 * Author: kang
-* Date: 2015-11-29
+* Date: 2015-11-28
 */
 //使用session前开启session的功能
 session_start();

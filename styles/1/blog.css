@@ -3,7 +3,6 @@
 	width:auto;
 	height:1000px;
 	border:2px solid #ccc;
-	
 }
 #blog h2{
 	text-indent:0;
@@ -35,6 +34,9 @@
 	width: 150px;
 	float: none;
 	color: #f60;
+}
+#blog1{
+	border: 3px solid #000;
 }
 
 
