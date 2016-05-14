@@ -20,7 +20,12 @@ if(!isset($_GET['active'])){
 }
 if(isset($_GET['action'])&& isset($_GET['active'])&& $_GET['action']=='ok'){
 	$_active=_mysql_string($_GET['active']);
-	if(_fetch_array("SELECT tg_active FROM tg_user WHERE tg_active='$_active' LIMIT 1")){
+	if(_fetch_array("SELECT 
+							tg_active 
+							FROM tg_user 
+							WHERE tg_active='$_active' 
+							LIMIT 1"
+		)){
 		//将active设置成空
 		_query("UPDATE tg_user SET tg_active=NULL WHERE tg_active='$_active' LIMIT 1");
 		if(_affected_rows()==1){

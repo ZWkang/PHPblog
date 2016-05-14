@@ -29,7 +29,14 @@
 	width: 75px;
 	float: left;
 }
-
+#blog dl dd a{
+	text-decoration: none;
+	color: #222;
+}
+#blog dl dd a:hover{
+	text-decoration: none;
+	color: red;
+}
 #blog dl dd.user{
 	width: 150px;
 	float: none;

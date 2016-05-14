@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+#member #member-main table{
+	width: 90%;
+	margin: 10px auto;
+	text-align: center;
+	background: #ccc;
+	margin-bottom: 0px;
+}
+#member #member-main table th,#member #member-main table td{
+	background: #fff;
+	height: 25px;
+	line-height: 25px;
+}
+#member #member-main table td a{
+	text-decoration: none;
+	color: #333;
+}
+#member #member-main table td a:hover{
+	text-decoration: underline;
+}
+#member-main{
+	position: relative;
+}
+#page_num{
+	position: absolute;
+	bottom:0;
+	left: 20%;
+}
+#page_text{
+	position: absolute;
+	bottom:0;
+	left: 20%;
+}

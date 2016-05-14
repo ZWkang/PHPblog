@@ -105,6 +105,21 @@ function _check_password($_first_pass,$_end_pass,$_min_number){
 	//将密码返回
 	return _mysql_string(sha1($_first_pass));
 }
+
+/**
+ * 验证修改密码
+ */
+function _check_modify_password($_string,$_min_number){
+	if(!empty($_string)){
+		if(strlen($_string)<$_min_number){
+			_alert_back('密码不得小于'.$_min_number.'位');
+		}
+	}else{
+		return $_string=null;
+	}
+	//密码
+	return sha1($_string);
+}
 function _check_sex($_string){
 	return _mysql_string($_string);
 
@@ -166,12 +181,11 @@ function _check_answer($_question,$_answer,$_min_size,$_max_size){
 function _check_email($_string,$_min_num,$_max_num){
 	//任意字符[a-zA-Z0-9_]=>\w
 	if(empty($_string))
-	{	return null;}
+	{	return null; }
 	else{
-	if (!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/',$_string))
-		{
-			_alert_back('输入邮箱地址不正确');
-		}
+	if (!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/',$_string)){
+		_alert_back('输入邮箱地址不正确');
+	}
 	
 	if(strlen($_string)<$_min_num||strlen($_string)>40){
 		_alert_back('email长度有误');
@@ -213,6 +227,10 @@ function _check_url($_string,$_max_size){
 	return _mysql_string($_string);
 }
 
-
-
+function _check_content($_string){
+	if(mb_strlen($_string,'utf-8')<10||mb_strlen($_string,'utf-8')>200){
+		_alert_back('短信内容不得小于十位或者大于200位');
+	}
+	return $_string;
+}
 ?>

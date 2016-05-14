@@ -1,12 +1,12 @@
 <?php
 /**
-* TestGuest Version1.0
+* TestGuest Version2.0
 * ================================================
 * Copy 2015 kang
 * Web: localhost
 * ================================================
 * Author: kang
-* Date: 2015-11-29
+* Date: 2015-11-28
 */
 
 //定义一个常量用来授权调用includes里面的文件

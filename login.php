@@ -30,6 +30,12 @@ if (@$_GET['action'] == 'login') {
 	$_clean['time']=_check_time($_POST['time']);
 	//数据库验证
 	if(!!$_rows = _fetch_array("SELECT tg_username,tg_uniqid FROM tg_user WHERE tg_username='{$_clean['username']}' AND tg_password='{$_clean['password']}' AND tg_active='' LIMIT 1")){
+		//登录成功后。记录登录信息
+		_query("UPDATE tg_user SET tg_last_time=NOW(),
+									tg_last_ip='{$_SERVER["REMOTE_ADDR"]}',
+									tg_login_count=tg_login_count+1
+								WHERE 
+									tg_username='{$_rows['tg_username']}'");
 		_close();
 		_session_destroy();
 		_setcookies($_rows['tg_username'],$_rows['tg_uniqid'],$_clean['time']);

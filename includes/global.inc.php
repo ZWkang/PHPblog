@@ -31,6 +31,30 @@ function _runtime() {
 		}
 }
 /**
+ * 判断唯一标识符是否异常
+ *@param $_mysql_uniqid
+ *@param $_cookie_uniqid
+ */
+function _uniqid($_mysql_uniqid,$_cookie_uniqid){
+		if($_mysql_uniqid!=$_cookie_uniqid){
+			_alert_back('唯一标识符异常');
+		}
+}
+/**
+ *_title() 标题截取函数 
+ *@param $_string 字符串
+ */
+function _title($_string){
+	if(mb_strlen($_string,'utf-8')>14){
+		$_string=mb_substr($_string, 1,14,'utf-8').'....';
+	}
+	return $_string;
+}
+
+
+
+
+/**
  *_html函数表示对字符串进行html过滤显示，如果是数组按数组方法过滤，如果是单独的字符串按单独字符串过滤 
  *@param unknown_type $_string
  */
@@ -98,9 +122,9 @@ function _paging($_type){
 			echo '<ul>';
 				for($i=0;$i<$_pageabsolute;$i++){
 					if($_page==$i+1){
-						echo	'<li><a href="blog.php?page='.($i+1).'"class="selected">'.($i+1).'</a></li>';
+						echo	'<li><a href="'.SCRIPT.'.php?page='.($i+1).'"class="selected">'.($i+1).'</a></li>';
 					}else{
-						echo	'<li><a href="blog.php?page='.($i+1).'">'.($i+1).'</a></li>';
+						echo	'<li><a href="'.SCRIPT.'.php?page='.($i+1).'">'.($i+1).'</a></li>';
 					}
 				}
 			echo '</ul>';
@@ -109,7 +133,7 @@ function _paging($_type){
 		echo '<div id="page_text">';
 			echo '<ul>';
 				echo '<li>|'.$_page.' / '.$_pageabsolute.' 页 |</li>';
-				echo '<li> 共有<strong>'.$_number.'</strong>个会员 | </li>';
+				echo '<li> 共有<strong>'.$_number.'</strong>个数据 | </li>';
 					if($_page==1){
 						echo '<li>首页 |</li>';
 						echo '<li>上一页 |</li>';
@@ -141,6 +165,16 @@ function _alert_back($_info){
 	echo "<script type='text/javascript'>alert('$_info');history.back();</script>";
 	exit();
 }
+/**
+ * 
+ *
+ *
+ */
+function _alert_close($_info){
+	echo "<script type='text/javascript'>alert('$_info');window.close();</script>";
+	exit();
+}
+
 function _location($_info,$_url) {
 	if(!empty($_info)){
 	echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
@@ -148,6 +182,8 @@ function _location($_info,$_url) {
 		header('Location:'.$_url);
 	}
 }
+
+
 /**
  *防止登录后还可以访问注册和登录界面
  */
@@ -162,8 +198,10 @@ function _login_state(){
  *_session_destroy清空session
  */
 function _session_destroy(){
-	session_unset();
-	session_destroy();
+	if(@session_start()){
+		session_unset();
+		session_destroy();
+	}
 }
 
 //删除cookie
@@ -182,9 +220,16 @@ function _check_code($_first_code,$_end_code){
 
 function _mysql_string($_string){
  	//get_magic_quotes_gpc(oid)如果开启状态就转义没开启就不转义
- 	if(@!GPC){
- 		return addslashes($_string);
- 	}else echo "需要转义";
+	if (@!GPC) {
+		if (is_array($_string)) {
+			foreach ($_string as $_key => $_value) {
+				$_string[$_key] = _mysql_string($_value);   //这里采用了递归，如果不理解，那么还是用htmlspecialchars
+			}
+		} else {
+			$_string = mysql_real_escape_string($_string);
+		}
+	} 
+	return $_string;
 }
 
 function _sha1_uniqid(){

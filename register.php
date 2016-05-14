@@ -29,7 +29,7 @@ if (@$_GET['action']=='register'){
 	{
 		_check_code($_POST['code'],$_SESSION['code']);
 		//引入验证文件
-		include_once ROOT_PATH.'includes/register.func.php';
+		include_once ROOT_PATH.'includes/check.func.php';
 		//可以通过唯一标识符来防止恶意注册，伪装表单跨站攻击等。
 		//创建一个空数组，用来存放提交过来的合法数据
 		$_clean=array();

@@ -60,6 +60,16 @@ h2{
 	color:orange;
 	text-decoration:none;
 }
+#header ul li strong.noread{
+	background: url(../../images/noread.gif) no-repeat left center;
+	padding: 0 0 0 18px;
+	margin: 0 0 0 5px;
+}
+#header ul li strong.read{
+	background: url(../../images/meg.gif) no-repeat left center;
+	padding: 0 0 0 18px;
+	margin: 0 0 0 5px;
+}
 #page_text{
 	clear: both;
 	height: 20px;
@@ -111,6 +121,63 @@ h2{
 	background: #666;
 	font-weight: bold;
 }
+
+#member{
+	width:auto;
+	height:600px;
+	border:2px solid #ccc;
+	font-size: 12px;
+}
+#member h2{
+	text-align: 0;
+	text-align: center;
+	height: 30px;
+	line-height: 30px;
+}
+#member #member-sidebar{
+	width: 300px;
+	height: 550px;
+	margin: 15px;
+	border: 1px dashed #999;
+	float: left;
+}
+#member #member-sidebar dl{
+	width: 250px;
+	background: red;
+	margin:15px auto;
+}
+#member #member-sidebar dl dt{
+	height: 40px;
+	line-height: 40px;
+	background: #999;
+	font-weight: bold;
+	text-align: center;
+	color: #fff;
+}
+
+#member #member-sidebar dl dd{
+	height: 40px;
+	line-height: 40px;
+	background: #eee;
+	font-weight: bold;
+	text-align: center;
+}
+#member #member-sidebar dl dd a{
+	display: block;
+	text-decoration: none;
+	color: #333;
+}
+#member #member-sidebar dl dd a:hover{
+	background: #ccc;
+}
+#member #member-main{
+	width: 590px;
+	height: 550px;
+	margin: 15px;
+	border: 1px solid black;
+	float: right;
+}
+
 #footer{
 	clear:both;
 	width:auto;

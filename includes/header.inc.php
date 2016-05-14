@@ -11,6 +11,7 @@
 if (!defined('IN_TG')){
 	exit('woriing');
 }
+global $_message_html;
 //防止恶意调用
 ?>
 	<div id="header">
@@ -19,7 +20,7 @@ if (!defined('IN_TG')){
 			<li><a href="index.php">首页</a></li>
 			<?php
 				if(isset($_COOKIE['username'])){
-					echo '<li><a href="member.php">'.$_COOKIE['username'].':个人中心</a></li>';
+					echo '<li><a href="member.php">'.$_COOKIE['username'].':个人中心</a>'.$_message_html.'</li>';
 					echo "\n";
 					echo '<li><a href="blog.php">博友</a></li>';
 				}else{
