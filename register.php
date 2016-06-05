@@ -96,9 +96,13 @@ if (@$_GET['action']=='register'){
 							)"
 		);
 			if(_affected_rows()==1){
+					//获取刚刚新增的id
+					$_clean['id']=_insert_id();
 					_close();
 					//跳转
 					_session_destroy();
+					//生成xml
+					@_set_xml('new',$_clean);
 					_location('恭喜你注册成功','active.php?active='.$_clean['active']);}
 			else{
 					_close();

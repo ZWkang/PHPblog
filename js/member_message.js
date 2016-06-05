@@ -9,7 +9,7 @@ window.onload=function(){
 		}
 	};
 	form.onsubmit=function(){
-		if(window.confirm('你确定好删除这些短信吗?')){
+		if(window.confirm('你确定好删除这些数据吗?')){
 			return true;
 		}
 		else{

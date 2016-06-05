@@ -82,8 +82,8 @@ $_result = _query("SELECT
 
 					</tr>
 					<?php
+						$_html = array();
 						while(!!$_rows = _fetch_array_list($_result)){
-							$_html = array();
 							$_html['id']=$_rows['tg_id'];
 							$_html['fromuser']=$_rows['tg_fromuser'];
 							$_html['content']=$_rows['tg_content'];
@@ -91,7 +91,7 @@ $_result = _query("SELECT
 							$_html[]=_html($_html);
 							if(empty($_rows['tg_state'])){
 								$_html['state']='<img src="images/read.gif" alt="未读" title="未读" />';
-								$_html['content_html']='<strong>'._title($_html['content']).'</strong>';
+								$_html['content_html']='<strong>'._title($_html['content'],14).'</strong>';
 							}else{
 								$_html['state']='<img src="images/noread.gif" alt="已读" title="已读" />';
 								$_html['content_html']=_title($_html['content']);

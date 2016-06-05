@@ -64,6 +64,12 @@ function _fetch_array($_sql){
 function _fetch_array_list($_result){
 	return mysql_fetch_array($_result,MYSQL_ASSOC);
 }
+
+function _insert_id(){
+	return mysql_insert_id();
+}
+
+
 /**
  * _free_result() 销毁大量的结果集
  * @param $_result()要销毁的结果集

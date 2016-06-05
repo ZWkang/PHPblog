@@ -44,9 +44,9 @@ function _uniqid($_mysql_uniqid,$_cookie_uniqid){
  *_title() 标题截取函数 
  *@param $_string 字符串
  */
-function _title($_string){
-	if(mb_strlen($_string,'utf-8')>14){
-		$_string=mb_substr($_string, 1,14,'utf-8').'....';
+function _title($_string,$_strlen){
+	if(mb_strlen($_string,'utf-8')>$_strlen){
+		$_string=mb_substr($_string, 0,$_strlen,'utf-8').'....';
 	}
 	return $_string;
 }
@@ -81,7 +81,7 @@ function _page($_sql,$_size){
 	global $_page,$_pagenum,$_pagesize,$_pageabsolute,$_number;
 	if (isset($_GET['page'])) {
 		$_page=$_GET['page'];	
-		if(empty($_page)||$_page<0 ||!is_numeric($_page)){
+		if(empty($_page)||$_page<=0 ||!is_numeric($_page)){
 			$_page=1;
 		}else{
 			$_page=intval($_page);
@@ -152,6 +152,8 @@ function _paging($_type){
 				
 			echo '</ul>';
 		echo '</div>';
+	}else{
+		_paging(2);
 	}
 }
 
@@ -319,5 +321,76 @@ function _code($_width=75,$_height=25,$_rnd_number=4,$_flag = true){
 	imagedestroy($_img);
 }
 
+function _get_xml($_xmlfile){
+	if(file_exists($_xmlfile)){
+		$_xml=file_get_contents($_xmlfile);
+		preg_match_all('/<vip>(.*)<\/vip>/s', $_xml, $_dom);
+		foreach($_dom[1] as $value){
+			preg_match_all('/<id>(.*)<\/id>/s', $_xml, $_id);
+			preg_match_all('/<username>(.*)<\/username>/s', $_xml, $_username);
+			preg_match_all('/<sex>(.*)<\/sex>/s', $_xml, $_sex);	
+			preg_match_all('/<face>(.*)<\/face>/s', $_xml, $_face);
+			preg_match_all('/<email>(.*)<\/email>/s', $_xml, $_email);
+			preg_match_all('/<url>(.*)<\/url>/s', $_xml, $_url);
+			$_html['id'] = $_id[1][0];
+			$_html['username'] = $_username[1][0];
+			$_html['sex'] = $_sex[1][0];
+			$_html['face'] = $_face[1][0];
+			$_html['email'] = $_email[1][0];
+			$_html['url'] = $_url[1][0];
+		}
+	}
+	else{
+		echo '文件不存在';
+	}
+	return $_html;
+}
 
+
+function _set_xml($_xmlfile,$_clean){
+	$_fp = @fopen($_xmlfile.'.xml', 'w');
+	if(!$_fp){
+		exit('系统错误，文件不存在');
+	}
+	flock($_fp, LOCK_EX);
+	$_string = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n";
+	fwrite($_fp, $_string,strlen($_string));
+	$_string = "<vip>\r\n";
+	fwrite($_fp, $_string,strlen($_string));
+	$_string = "\t<id>{$_clean['id']}</id>\r\n";
+	fwrite($_fp, $_string,strlen($_string));
+	$_string = "\t<username>{$_clean['username']}</username>\r\n";
+	fwrite($_fp, $_string,strlen($_string));
+	$_string = "\t<sex>{$_clean['sex']}</sex>\r\n";
+	fwrite($_fp, $_string);
+	$_string = "\t<face>{$_clean['face']}</face>\r\n";
+	fwrite($_fp, $_string);
+	$_string = "\t<email>{$_clean['email']}</email>\r\n";
+	fwrite($_fp, $_string);
+	$_string = "\t<url>{$_clean['url']}</url>\r\n";
+	fwrite($_fp, $_string);
+	$_string = "</vip>";
+	fwrite($_fp, $_string);
+	flock($_fp, LOCK_UN);
+	fclose($_fp);
+}
+
+
+/**
+ * 解析ubb代码
+ */
+function _ubb($_string) {
+	$_string = nl2br($_string);
+	$_string = preg_replace('/\[size=(.*)\](.*)\[\/size\]/U','<span style="font-size:\1px">\2</span>',$_string);
+	$_string = preg_replace('/\[b\](.*)\[\/b\]/U','<strong>\1</strong>',$_string);
+	$_string = preg_replace('/\[i\](.*)\[\/i\]/U','<em>\1</em>',$_string);
+	$_string = preg_replace('/\[u\](.*)\[\/u\]/U','<span style="text-decoration:underline">\1</span>',$_string);
+	$_string = preg_replace('/\[s\](.*)\[\/s\]/U','<span style="text-decoration:line-through">\1</span>',$_string);
+	$_string = preg_replace('/\[color=(.*)\](.*)\[\/color\]/U','<span style="color:\1">\2</span>',$_string);
+	$_string = preg_replace('/\[url\](.*)\[\/url\]/U','<a href="\1" target="_blank">\1</a>',$_string);
+	$_string = preg_replace('/\[email\](.*)\[\/email\]/U','<a href="mailto:\1">\1</a>',$_string);
+	$_string = preg_replace('/\[img\](.*)\[\/img\]/U','<img src="\1" alt="图片" />',$_string);
+	$_string = preg_replace('/\[flash\](.*)\[\/flash\]/U','<embed style="width:480px;height:400px;" src="\1" />',$_string);
+	return $_string;
+}
 ?>

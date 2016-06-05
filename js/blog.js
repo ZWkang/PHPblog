@@ -11,6 +11,12 @@ window.onload=function(){
 			centerWindow('friend.php?id='+this.title,'friend',250,400);
 		};
 	}
+	var flower = document.getElementsByName("flower");
+	for(var i=0;i<flower.length;i++){
+		flower[i].onclick=function(){
+			centerWindow('flower.php?id='+this.title,'flower',250,400);
+		};
+	}
 }
 
 function centerWindow(url,name,height,width){

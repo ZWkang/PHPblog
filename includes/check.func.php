@@ -233,4 +233,25 @@ function _check_content($_string){
 	}
 	return $_string;
 }
+
+function _check_post_title($_string,$_min,$_max) {
+	if (mb_strlen($_string,'utf-8') < $_min || mb_strlen($_string,'utf-8') > $_max) {
+		_alert_back('帖子标题内容不得小于'.$_min.'位大于'.$_max.'位！');
+	}
+	return $_string;
+}
+
+function _check_post_content($_string,$_num) {
+	if (mb_strlen($_string,'utf-8') < $_num) {
+		_alert_back('帖子内容不得小于'.$_num.'位！');
+	}
+	return $_string;
+}
+
+function _check_autograph($_string,$_num) {
+	if (mb_strlen($_string,'utf-8') >$_num) {
+		_alert_back('帖子内容不得小于'.$_num.'位！');
+	}
+	return $_string;
+}
 ?>

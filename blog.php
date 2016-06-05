@@ -75,8 +75,8 @@ $_result = _query("SELECT
 	<div id="blog">
 		<h2>博友列表</h2>
 		<?php 
+			$_html = array();
 			while(!!$_rows = _fetch_array_list($_result,MYSQL_ASSOC)){
-				$_html = array();
 				$_html['id']=$_rows['tg_id'];
 				$_html['username']=$_rows['tg_username'];
 				$_html['face']=$_rows['tg_face'];
@@ -89,7 +89,7 @@ $_result = _query("SELECT
 				<dd class="message" ><a href="javascript:;" name="message" title="<?php echo $_html['id']?>">发消息</a></dd>
 				<dd class="friend" ><a href="javascript:;" name="friend" title="<?php echo $_html['id']?>">加为好友</a></dd>
 				<dd>写短信</dd>
-				<dd>送花</dd>
+				<dd class="flower"><a href="javascript:;" name="flower" title="<?php echo $_html['id']?>">送花</a></dd>
 			</dl>
 		<?php ?>
 	<?php
